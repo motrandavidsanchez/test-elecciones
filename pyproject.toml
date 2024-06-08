@@ -14,6 +14,8 @@ django-extensions = "^3.2.3"
 django-environ = "^0.11.2"
 psycopg2-binary = "^2.9.9"
 django-configurations = "^2.5"
+django-admin-black = "^1.0.9"
+django-browser-reload = "^1.12.1"
 
 
 [tool.poetry.group.dev.dependencies]
