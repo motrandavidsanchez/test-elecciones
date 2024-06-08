@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,10 +44,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ballot.urls'
 
+HOME_TEMPLATES = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [HOME_TEMPLATES],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
