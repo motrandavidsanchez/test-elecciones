@@ -27,6 +27,7 @@ class PoliticalParty(models.Model):
     president = models.CharField(max_length=100, verbose_name='Presidente')
     vice_president = models.CharField(max_length=100, verbose_name='Vice-presidente')
     slogan = models.CharField(max_length=100)
+    votes = models.IntegerField(default=0, verbose_name='Votos')
 
     def __str__(self):
         return f'{self.party_number} - {self.party_name}'
