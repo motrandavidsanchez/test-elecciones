@@ -12,6 +12,6 @@ pnpm-debug.log
 
 # static and media
 media/
-static/
+staticfiles/
 
 .idea

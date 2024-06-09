@@ -10,21 +10,47 @@
     {% include 'includes/head.html' %}
     {% block extrahead %}{% endblock extrahead %}
     {% block extrastyle %}{% endblock extrastyle %}
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .main-panel-personalizado {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 
-<body class="{% block bodyclass %}{% endblock bodyclass %}">
+<body>
+    <video autoplay muted loop class="video-background">
+        <source src="{% static 'videos/fondo_pantalla.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <div class="wrapper">
-        <div class="main-panel">
+        <div class="main-panel main-panel-personalizado" style="background: transparent;">
             {% block content %}{% endblock content %}
-            {% block footer %}
-                {% include 'includes/footer.html' %}
-            {% endblock footer %}
         </div>
     </div>
-    {% block fixed-plugin %}
-        {% include 'includes/fixed-plugin.html' %}
-    {% endblock fixed-plugin %}
-        {% include 'includes/scripts.html' %}
+    {% include 'includes/scripts.html' %}
     {% block extrajs %}{% endblock extrajs %}
 </body>
 
