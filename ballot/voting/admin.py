@@ -14,3 +14,4 @@ class VoterAdmin(admin.ModelAdmin):
 class PoliticalPartyAdmin(admin.ModelAdmin):
     list_display = ('party_number', 'party_name', 'president', 'vice_president', 'slogan')
     search_fields = ('party_number', 'party_name')
+    exclude = ('votes',)

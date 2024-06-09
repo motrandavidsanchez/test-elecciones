@@ -22,10 +22,25 @@ class Voter(models.Model):
 
 
 class PoliticalParty(models.Model):
+    class Color(models.TextChoices):
+        WHITE = 'WHITE', 'Blanco'
+        RED = 'RED', 'Rojo'
+        BLUE = 'BLUE', 'Azul'
+        GREEN = 'GREEN', 'Verde'
+        YELLOW = 'YELLOW', 'Amarillo'
+        BLACK = 'BLACK', 'Negro'
+
     party_number = models.PositiveIntegerField(unique=True, verbose_name='Numero de lista')
     party_name = models.CharField(max_length=50, verbose_name='Nombre')
     president = models.CharField(max_length=100, verbose_name='Presidente')
     vice_president = models.CharField(max_length=100, verbose_name='Vice-presidente')
+    representative_color = models.CharField(
+        max_length=6,
+        choices=Color.choices,
+        default=Color.WHITE,
+        verbose_name='Color representativo',
+    )
+    image = models.FileField(upload_to='images/', null=True, blank=True)
     slogan = models.CharField(max_length=100)
     votes = models.IntegerField(default=0, verbose_name='Votos')
 
