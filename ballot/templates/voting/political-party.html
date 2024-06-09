@@ -11,45 +11,54 @@
     display: inline-block;
     margin-bottom: 15px;
 }
+
+.list-number {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+    margin-top: 10px;
+}
 </style>
 <div class="content">
     <div class="row" style="margin-left: -249px;">
 
         {% if political_parties %}
             {% for political_party in political_parties %}
-            <div class="col-md-4">
-                <div class="card card-user">
-                    <div class="card-body">
-                        <p class="card-text">
-                        <div class="author">
-                            <div class="block block-one"
-                                 style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
-                            <div class="block block-two"
-                                 style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
-                            <div class="block block-three"
-                                 style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
-                            <div class="block block-four"
-                                 style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
-                            <img class="avatar" src="{{political_party.image.url}}" alt="..." style="width: 300px; height: 300px;">
-                            <h4 class="title">Presidenta {{political_party.president.upper}}</h4>
-                            <p class="description">
-                                Vicepresidente {{political_party.vice_president.upper}}
+                <div class="col-md-4">
+                    <div class="card card-user">
+                        <div class="card-body">
+                            <p class="card-text">
+                            <div class="author">
+                                <div class="block block-one"
+                                     style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
+                                <div class="block block-two"
+                                     style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
+                                <div class="block block-three"
+                                     style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
+                                <div class="block block-four"
+                                     style="background: linear-gradient(to right, {{political_party.representative_color}} 0%, rgba(225, 78, 202, 0) 100%);"></div>
+                                <img class="avatar" src="{{political_party.image.url}}" alt="..." style="width: 300px; height: 300px;">
+                                <h3 class="title">{{political_party.party_name.upper}}</h3>
+                                <h4>Presidenta {{political_party.president.upper}}</h4>
+                                <h4>Vicepresidente {{political_party.vice_president.upper}}</h4>
+                                <p class="list-number">
+                                    Número de Lista: {{ political_party.party_number }}
+                                </p>
+                            </div>
                             </p>
+                            <div class="card-description" style="text-align: center">
+                                <h6>"{{political_party.slogan}}"</h6>
+                            </div>
                         </div>
-                        </p>
-                        <div class="card-description" style="text-align: center">
-                            <h6>"{{political_party.slogan}}"</h6>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="button-container">
-                            <button href="javascript:void(0)" class="btn">
-                                <span>Votar</span>
-                            </button>
+                        <div class="card-footer">
+                            <div class="button-container">
+                                <button href="javascript:void(0)" class="btn">
+                                    <span>Votar</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         {% endif %}
 
