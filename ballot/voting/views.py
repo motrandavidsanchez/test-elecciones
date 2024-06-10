@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic import TemplateView, FormView
 
 from voting.forms import DNICheckForm
-from voting.models import PoliticalParty, Voter
+from voting.models import PoliticalParty, Voter, Voting
 from voting.utils import (
     has_voted_percentage,
     has_voted,
@@ -34,11 +34,18 @@ class CheckDNIView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         dni = form.cleaned_data['dni']
+        voter = Voter.objects.get(dni=dni)
+        establishment = voter.establishment
+        voting = Voting.objects.get(establishment=establishment)
         try:
             if not has_voted(dni):
                 form.add_error('dni', 'Usted ya emitio el voto.')
                 return self.form_invalid(form)
-            Voter.objects.get(dni=dni)
+
+            if not voting.voting:
+                form.add_error('dni', 'Ya cerraron las votaciones del establecimiento.')
+                return self.form_invalid(form)
+
             return redirect('political-party', dni=dni)
         except Voter.DoesNotExist:
             form.add_error('dni', 'DNI no encontrado en el padrón.')
