@@ -33,11 +33,11 @@ class CheckDNIView(LoginRequiredMixin, FormView):
     form_class = DNICheckForm
 
     def form_valid(self, form):
-        dni = form.cleaned_data['dni']
-        voter = Voter.objects.get(dni=dni)
-        establishment = voter.establishment
-        voting = Voting.objects.get(establishment=establishment)
         try:
+            dni = form.cleaned_data['dni']
+            voter = Voter.objects.get(dni=dni)
+            establishment = voter.establishment
+            voting = Voting.objects.get(establishment=establishment)
             if not has_voted(dni):
                 form.add_error('dni', 'Usted ya emitio el voto.')
                 return self.form_invalid(form)
