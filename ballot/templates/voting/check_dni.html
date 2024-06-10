@@ -1,0 +1,33 @@
+{% extends 'layouts/base-public.html' %}
+{% load static %}
+{% block content %}
+<div class="content">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="title">Emita su voto con responsabilidad.</h3>
+        </div>
+        <div class="card-body">
+          {% if form.errors %}
+              <h4 class="text-danger" style=" margin-left: -40px;">{{form.errors.dni}}</h4>
+          {% endif %}
+          <form method="post" action="{% url 'check-dni' %}">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 pr-md-1">
+                <div class="form-group">
+                  <label>Ingrese su DNI:</label>
+                  <input type="number" name="dni" min="0" required="" id="id_dni" class="form-control"  placeholder="D.N.I">
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-fill btn-primary" style="background: cornflowerblue;">Ingresar</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

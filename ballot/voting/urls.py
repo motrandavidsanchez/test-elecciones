@@ -1,7 +1,8 @@
 from django.urls import path
 
-from voting.views import PoliticalPartyView
+from voting.views import PoliticalPartyView, CheckDNIView
 
 urlpatterns = [
-    path('political-party', PoliticalPartyView.as_view()),
+    path('check-dni', CheckDNIView.as_view(), name='check-dni'),
+    path('political-party', PoliticalPartyView.as_view(), name='political-party'),
 ]
