@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Voter, PoliticalParty
+from .models import Voter, PoliticalParty, Voting
 
 
 @admin.register(Voter)
@@ -17,3 +17,11 @@ class PoliticalPartyAdmin(admin.ModelAdmin):
     list_display = ('party_number', 'party_name', 'president', 'vice_president', 'slogan')
     search_fields = ('party_number', 'party_name')
     exclude = ('votes',)
+
+
+@admin.register(Voting)
+class VotingAdmin(admin.ModelAdmin):
+    list_display = ('establishment', 'voting')
+    search_fields = ('establishment',)
+    list_filter = ('voting',)
+    autocomplete_fields = ('establishment',)

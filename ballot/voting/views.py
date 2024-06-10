@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import TemplateView, FormView
@@ -20,7 +21,7 @@ class IndexView(TemplateView):
         return context
 
 
-class CheckDNIView(FormView):
+class CheckDNIView(LoginRequiredMixin, FormView):
     template_name = 'voting/check_dni.html'
     form_class = DNICheckForm
 
@@ -34,7 +35,7 @@ class CheckDNIView(FormView):
             return self.form_invalid(form)
 
 
-class PoliticalPartyView(TemplateView):
+class PoliticalPartyView(LoginRequiredMixin, TemplateView):
     template_name = 'voting/political-party.html'
 
     def get_context_data(self, **kwargs):

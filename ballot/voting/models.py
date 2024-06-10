@@ -21,8 +21,8 @@ class Voter(models.Model):
         return f'{self.first_name} {self.last_name}'
 
     class Meta:
-        verbose_name = 'Voter'
-        verbose_name_plural = 'Voters'
+        verbose_name = 'Votante'
+        verbose_name_plural = 'Votantes'
 
 
 class PoliticalParty(models.Model):
@@ -52,9 +52,27 @@ class PoliticalParty(models.Model):
         return f'{self.party_number} - {self.party_name}'
 
     class Meta:
-        verbose_name = 'Political Party'
-        verbose_name_plural = 'Political Parties'
+        verbose_name = 'Partido Politico'
+        verbose_name_plural = 'Partidos Politicos'
 
     def sum_votes(self):
         self.votes += 1
         self.save()
+
+
+class Voting(models.Model):
+    establishment = models.ForeignKey(
+        Establishment,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name='Establecimiento',
+    )
+    voting = models.BooleanField(default=False, verbose_name='Votación')
+
+    class Meta:
+        verbose_name = 'Votación'
+        verbose_name_plural = 'Votaciones'
+
+    def __str__(self):
+        return f'{self.establishment} - {self.voting}'
