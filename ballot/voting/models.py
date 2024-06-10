@@ -54,3 +54,7 @@ class PoliticalParty(models.Model):
     class Meta:
         verbose_name = 'Political Party'
         verbose_name_plural = 'Political Parties'
+
+    def sum_votes(self):
+        self.votes += 1
+        self.save()

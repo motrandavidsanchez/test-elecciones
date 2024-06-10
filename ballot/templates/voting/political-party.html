@@ -52,9 +52,14 @@
                         </div>
                         <div class="card-footer">
                             <div class="button-container">
-                                <button href="javascript:void(0)" class="btn">
-                                    <span>Votar</span>
-                                </button>
+                                <form method="post" action="{% url 'vote' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="dni" value="{{dni}}">
+                                    <input type="hidden" name="party" value="{{ political_party.id }}">
+                                    <button href="javascript:void(0)" type="submit" class="btn">
+                                        <span>Votar</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

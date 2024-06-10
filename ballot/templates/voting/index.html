@@ -26,6 +26,7 @@
                                 <p class="list-number">
                                     Número de Lista: {{ political_party.party_number }}
                                 </p>
+                            <p>VOTOS: {{political_party.votes}}</p>
                             </div>
                             </p>
                             <div class="card-description" style="text-align: center">
@@ -91,6 +92,13 @@ demo = {
     gradientStroke.addColorStop(0.4, 'rgba(28,33,38,0.0)');
     gradientStroke.addColorStop(0, 'rgba(28,33,38,0)');
 
+    var partyVotes = [];
+    var partyNames = [];
+    {% for political_party in political_parties %}
+        partyVotes.push({{ political_party.votes }});
+        partyNames.push("{{ political_party.party_name.upper }}");
+    {% endfor %}
+
     var myChart = new Chart(ctx, {
       type: 'doughnut',
       responsive: true,
@@ -98,10 +106,7 @@ demo = {
         display: false
       },
       data: {
-        labels: [
-            'CASA TARGARYEN',
-            'CASA HIGHTOWER',
-        ],
+        labels: partyNames,
         datasets: [{
           backgroundColor: [
               'rgb(232, 18, 18, 0.5)',
@@ -111,7 +116,7 @@ demo = {
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          data: [60, 40],
+          data: partyVotes,
         }]
       },
       options: gradientBarChartConfiguration
