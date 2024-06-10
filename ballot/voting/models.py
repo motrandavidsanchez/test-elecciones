@@ -1,6 +1,6 @@
 from django.db import models
 
-from geodirectory.models import Table
+from geodirectory.models import Establishment
 
 
 class Voter(models.Model):
@@ -8,8 +8,12 @@ class Voter(models.Model):
     last_name = models.CharField(max_length=50, verbose_name='Apellido')
     dni = models.PositiveIntegerField(unique=True, verbose_name='DNI')
     birth_date = models.DateField(verbose_name='Fecha de nacimiento')
-    table = models.ForeignKey(
-        Table, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Mesa'
+    establishment = models.ForeignKey(
+        Establishment,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name='Establecimiento',
     )
     has_voted = models.BooleanField(default=False, verbose_name='Votó')
 
