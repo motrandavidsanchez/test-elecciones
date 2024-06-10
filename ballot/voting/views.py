@@ -66,7 +66,7 @@ class VoteView(View):
     def post(self, request, *args, **kwargs):
         dni = request.POST.get('dni')
         party_id = request.POST.get('party')
-        Voter.objects.get(dni=dni).update(has_voted=True)
+        Voter.objects.filter(dni=dni).update(has_voted=True)
         political_party = PoliticalParty.objects.get(id=int(party_id))
         political_party.sum_votes()
         return redirect('check-dni')

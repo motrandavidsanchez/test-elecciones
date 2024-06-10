@@ -16,7 +16,7 @@ def has_voted_percentage():
     if total_voters == 0:
         return 0
 
-    return (voted_voters / total_voters) * 100
+    return round((voted_voters / total_voters) * 100)
 
 
 def all_voting_false():
