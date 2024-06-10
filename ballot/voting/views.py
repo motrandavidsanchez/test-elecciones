@@ -5,7 +5,12 @@ from django.views.generic import TemplateView, FormView
 
 from voting.forms import DNICheckForm
 from voting.models import PoliticalParty, Voter
-from voting.utils import has_voted_percentage
+from voting.utils import (
+    has_voted_percentage,
+    has_voted,
+    all_voting_false,
+    all_voting_false_percentage,
+)
 
 
 class IndexView(TemplateView):
@@ -18,6 +23,8 @@ class IndexView(TemplateView):
         context['political_parties'] = PoliticalParty.objects.all()
         context['total_voters'] = total_voters
         context['stake'] = has_voted_percentage()
+        context['voting'] = all_voting_false()
+        context['total_voting'] = all_voting_false_percentage()
         return context
 
 
@@ -28,6 +35,9 @@ class CheckDNIView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         dni = form.cleaned_data['dni']
         try:
+            if not has_voted(dni):
+                form.add_error('dni', 'Usted ya emitio el voto.')
+                return self.form_invalid(form)
             Voter.objects.get(dni=dni)
             return redirect('political-party', dni=dni)
         except Voter.DoesNotExist:
@@ -49,13 +59,7 @@ class VoteView(View):
     def post(self, request, *args, **kwargs):
         dni = request.POST.get('dni')
         party_id = request.POST.get('party')
-        voter = Voter.objects.get(dni=dni)
+        Voter.objects.get(dni=dni).update(has_voted=True)
         political_party = PoliticalParty.objects.get(id=int(party_id))
-        if not voter.has_voted:
-            voter.has_voted = True
-            political_party.sum_votes()
-            voter.save()
-            return redirect('index')
-        else:
-            # Redirigir a una página de error si ya ha votado
-            return redirect('already_voted_page')
+        political_party.sum_votes()
+        return redirect('index')

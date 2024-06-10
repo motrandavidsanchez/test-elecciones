@@ -44,12 +44,17 @@
                 <div class="card-header">
                     <h3 class="title">Resultados:</h3>
                     <h4>Electores: <span>{{total_voters}}</span></h4>
-                    <h4>Participación:  <span>{{stake}}%</span></h4>
+                    <h4>Participación: <span>{{stake}}%</span></h4>
+                    <h4>Establecimientos que cerraron las votaciones: <span>{{total_voting}}%</span></h4>
                 </div>
                 <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="CountryChart"></canvas>
-                    </div>
+                    {% if voting %}
+                        <div class="chart-area">
+                            <canvas id="CountryChart"></canvas>
+                        </div>
+                    {% else %}
+                        <h4>Votaciones en proceso...</h4>
+                    {% endif %}
                 </div>
             </div>
         </div>
