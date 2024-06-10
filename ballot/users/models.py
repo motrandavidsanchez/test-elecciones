@@ -16,6 +16,8 @@ class Profile(models.Model):
     establishment = models.ForeignKey(
         Establishment,
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
         verbose_name='Establecimiento',
     )
 
@@ -24,4 +26,4 @@ class Profile(models.Model):
         verbose_name_plural = 'Perfiles'
 
     def __str__(self):
-        return self.establishment.name
+        return self.establishment.name if self.establishment else '-'

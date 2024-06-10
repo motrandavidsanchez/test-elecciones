@@ -25,3 +25,10 @@ class VotingAdmin(admin.ModelAdmin):
     search_fields = ('establishment',)
     list_filter = ('voting',)
     autocomplete_fields = ('establishment',)
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        else:
+            return qs.filter(establishment__profile__user=request.user)
