@@ -27,7 +27,7 @@ INSTALLED_APPS_DEV = [
     'django_extensions',
 ]
 
-INSTALLED_APPS_BALLOT = ['voting', 'geodirectory']
+INSTALLED_APPS_BALLOT = ['voting', 'geodirectory', 'users']
 
 INSTALLED_APPS = INSTALLED_APPS_DJANGO + INSTALLED_APPS_DEV + INSTALLED_APPS_BALLOT
 

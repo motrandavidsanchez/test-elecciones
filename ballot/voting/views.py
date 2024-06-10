@@ -62,4 +62,4 @@ class VoteView(View):
         Voter.objects.get(dni=dni).update(has_voted=True)
         political_party = PoliticalParty.objects.get(id=int(party_id))
         political_party.sum_votes()
-        return redirect('index')
+        return redirect('check-dni')
