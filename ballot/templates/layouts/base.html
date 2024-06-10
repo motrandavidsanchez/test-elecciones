@@ -11,7 +11,7 @@
     {% block extrastyle %}{% endblock extrastyle %}
 </head>
 
-<body class="{% block bodyclass %}{% endblock bodyclass %}">
+<body class="white-content">
     <div class="wrapper">
         {% block sidebar %}
             {% include 'includes/sidebar.html' %}
@@ -23,10 +23,7 @@
             {% block content %}{% endblock content %}
         </div>
     </div>
-    {% block fixed-plugin %}
-        {% include 'includes/fixed-plugin.html' %}
-    {% endblock fixed-plugin %}
-        {% include 'includes/scripts.html' %}
+    {% include 'includes/scripts.html' %}
     {% block extrajs %}{% endblock extrajs %}
 </body>
 

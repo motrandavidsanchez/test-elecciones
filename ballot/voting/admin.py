@@ -8,6 +8,7 @@ class VoterAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'dni', 'birth_date', 'has_voted')
     search_fields = ('first_name', 'last_name', 'dni')
     list_filter = ('has_voted',)
+    autocomplete_fields = ('establishment',)
     exclude = ('has_voted',)
 
 

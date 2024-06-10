@@ -16,3 +16,4 @@ class LocalityAdmin(admin.ModelAdmin):
 @admin.register(Establishment)
 class EstablishmentAdmin(admin.ModelAdmin):
     list_display = ['name', 'locality']
+    search_fields = ('name',)
