@@ -16,6 +16,7 @@ psycopg2-binary = "^2.9.9"
 django-configurations = "^2.5"
 django-admin-black = "^1.0.9"
 django-browser-reload = "^1.12.1"
+pytest-mock = "^3.14.0"
 
 
 [tool.poetry.group.dev.dependencies]
